@@ -45,7 +45,7 @@ async function verifyAndroidSafetyNeyAttestation(ctapCredResp, clientDataJSON) {
   const { subject } = getCertificationInfo(certPath[0]);
   if (subject.CN !== "attest.android.com")
     throw new Error('The common name is not set to "attest.android.com"!');
-
+ 
   //validateCertificationPath(certPath);
 
   const signatureBaseBuffer = Buffer.from(jwtParts[0] + "." + jwtParts[1]);

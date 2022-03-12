@@ -2,9 +2,10 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import { Grid, Button, Message, Form, Segment, Header } from 'semantic-ui-react';
 import { getGetAssertionChallenge, getMakeCredentialsChallenge, sendWebAuthnResponse, getProfile, logout, registerFail } from './webauthn';
-import { preformatGetAssertReq, preformatMakeCredReq, publicKeyCredentialToJSON } from '../helpers';
+import { isPlatformWebAuthnSupport, preformatGetAssertReq, preformatMakeCredReq, publicKeyCredentialToJSON } from '../helpers';
 
 function App() {
+	const [isPlatformSupported, setisPlatformSupported] = useState(false)
 	const [errMsg, setErrMsg] = useState('');
 	const [email, setEmail ] = useState('');
 	const [successMsg, setSuccessMsg] = useState('');
@@ -15,9 +16,11 @@ function App() {
 		setEmail(e.target.value);
 	};
 	const handleRegister = () => {
+		console.log("====<")
 		getMakeCredentialsChallenge({email})
 			.then((response) => {
 				const publicKey = preformatMakeCredReq(response);
+				console.log("===>",publicKey)
 				return navigator.credentials.create({ publicKey });
 			})
 			.then((response) => {
@@ -82,6 +85,7 @@ function App() {
 	};
 
 	useEffect(() => {;
+	
 		if(localStorage.getItem('loggedIn'))
 			setLoggedIn(true);
 		if(loggedIn)
@@ -95,6 +99,17 @@ function App() {
 				});
 	}, [loggedIn]);
 
+	useEffect(() => {
+	  isPlatformWebAuthnSupport().then(result=>{
+		setisPlatformSupported(result)
+	  })
+	
+	  return () => {
+		
+	  }
+	}, [])
+	
+
 	return (
 		<div className='App-header'>
 			<Grid container textAlign='center' verticalAlign='middle'>
@@ -102,6 +117,9 @@ function App() {
 					<Header as='h2' textAlign='center' style={{ color: 'white'}}>
 						WebAuthn Demo
 					</Header>
+					{
+						!isPlatformSupported && <Message negative icon='warning sign' size='mini' header={"Sorry, webauthn is not supported in your current platform."}/>
+					}
 					{!loggedIn ?
 						<Form size='large'>
 							{errMsg && <Message negative icon='warning sign' size='mini' header={errMsg}/>}

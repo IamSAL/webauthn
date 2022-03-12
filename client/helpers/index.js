@@ -51,4 +51,27 @@ let preformatGetAssertReq = (getAssert) => {
 	return getAssert;
 };
 
-export { publicKeyCredentialToJSON, generateRandomBuffer, preformatGetAssertReq, preformatMakeCredReq };
+
+function isPlatformWebAuthnSupport() {
+	return new Promise((resolve,reject)=>{
+		
+	if (window.location.protocol === "http:" && (window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1")){
+		resolve(false);
+	}
+    if (window.PublicKeyCredential === undefined ||
+        typeof window.PublicKeyCredential !== "function") {
+			resolve(false);
+    }
+
+	window.PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable().then((supported)=>{
+		if(supported){
+			resolve(true)
+		}else{
+			resolve(false)
+		}
+	})
+
+	})
+}
+
+export { publicKeyCredentialToJSON, generateRandomBuffer, preformatGetAssertReq, preformatMakeCredReq, isPlatformWebAuthnSupport};

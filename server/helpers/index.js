@@ -82,7 +82,9 @@ function serverMakeCred(id, email) {
     authenticatorSelection: {
       requireResidentKey: false,
       userVerification: "discouraged",
+      authenticatorAttachment:"platform"
     },
+
   };
 
   return makeCredentialds;

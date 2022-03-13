@@ -25,6 +25,7 @@
     "elliptic": "^6.5.2",
     "express": "^4.17.1",
     "jsrsasign": "^8.0.15",
+    "localtunnel": "^2.0.2",
     "mongodb": "^3.5.5",
     "mongoose": "^5.9.7",
     "node-rsa": "^1.0.8",

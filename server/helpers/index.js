@@ -33,7 +33,7 @@ function serverMakeCred(id, email) {
   const makeCredentialds = {
     challenge: randomBase64URLBuffer(32),
     rp: {
-      name: "Toni WebAuthn App",
+      name: "WebAuthn App",
     },
     user: {
       id,
@@ -82,9 +82,8 @@ function serverMakeCred(id, email) {
     authenticatorSelection: {
       requireResidentKey: false,
       userVerification: "discouraged",
-      authenticatorAttachment:"platform"
+      authenticatorAttachment: "platform",
     },
-
   };
 
   return makeCredentialds;

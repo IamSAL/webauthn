@@ -1,5 +1,6 @@
 "use strict";
 require("dotenv").config();
+const localtunnel = require("localtunnel");
 const express = require("express");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
@@ -35,6 +36,14 @@ app.get("/", (req, res) => {
 app.use("/webauthn", userRouter);
 const port = process.env.PORT || 8080;
 
-app.listen(port, () => {
+app.listen(port, async () => {
+  const tunnel = await localtunnel({ port: port, subdomain: "swt-bank" });
   console.log("Server listening on http://localhost:" + port);
+  console.log("Tunnel:https://" + tunnel.clientId + ".loca.lt");
+  tunnel.on("close", () => {
+    console.log("Tunnel closed");
+  });
+  process.on("exit", () => {
+    tunnel.close();
+  });
 });

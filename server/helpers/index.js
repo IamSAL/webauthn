@@ -34,6 +34,7 @@ function serverMakeCred(id, email) {
     challenge: randomBase64URLBuffer(32),
     rp: {
       name: "WebAuthn App",
+      id:"sk-salman.com" 
     },
     user: {
       id,

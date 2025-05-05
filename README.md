@@ -5,7 +5,7 @@ Users register with a username and one of the supported authenticators.
 Login process requires matching username and authenticator pair.
 
 ## Demo link:
-https://web-auth-n-demo.herokuapp.com/
+https://authn.sk-salman.com/
 
 ## Installation
 ### Requirements

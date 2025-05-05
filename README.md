@@ -12,7 +12,7 @@ https://authn.sk-salman.com/
   - Node.js
   - MongoDB (local or remote cluster)
 ### Setup
-  - Clone this repo ` git clone https://github.com/tonijukica/webauthn.git`
+  
   - Run `npm install` in cloned repo.
   - Configure environment variables in `.env` file, use `.env.example` as guide. MongoDB connection is required for the app to run.
   If the app is run locally then it's not necessary to provide RP Id(Relaying Party ID) as it defaults to localhost, else you must provide RP Id to match your origin e.g.`RP_ID=https://web-auth-n-demo.herokuapp.com/`  

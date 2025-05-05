@@ -34,7 +34,7 @@ function serverMakeCred(id, email) {
     challenge: randomBase64URLBuffer(32),
     rp: {
       name: "WebAuthn App",
-      id:"sk-salman.com" 
+      id:process.env.RP_ID || "localhost" 
     },
     user: {
       id,

@@ -7,7 +7,7 @@
     "dev:client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "dev:server": "nodemon server/index.js",
     "build": "webpack --mode production",
-    "start": "npm run build && node server/index.js"
+    "start": "node server/index.js"
   },
   "keywords": [],
   "author": "Toni Jukica",
